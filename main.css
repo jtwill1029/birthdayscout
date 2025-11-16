@@ -173,6 +173,29 @@ body {
     color: #4b5563;
 }
 
+/* Birthday form inside hero */
+
+.birthday-form {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.birthday-form label {
+    font-size: 0.9rem;
+    color: #4b5563;
+    flex-basis: 100%;
+}
+
+.birthday-form input[type="date"] {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
+    border: 1px solid #d1d5db;
+    font-size: 0.9rem;
+}
+
 /* Hero right card */
 
 .hero-right {
@@ -260,6 +283,19 @@ body {
 
 .deals-header h1 {
     margin: 0 0 0.4rem;
+}
+
+/* Birthday banner on deals page */
+
+.birthday-banner {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    font-size: 0.85rem;
+    color: #7c2d12;
 }
 
 /* Filters row */
