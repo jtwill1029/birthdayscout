@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <title>BirthdayScout – Find Birthday Freebies</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Make sure this matches your CSS filename -->
     <link rel="stylesheet" href="main.css">
+
+    <!-- Confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body>
     <!-- Top nav -->
     <header class="nav">
         <div class="nav-left">
-            <div class="logo-mark">🎂</div>
+            <div class="logo-mark">
+                <img src="logo.png" alt="BirthdayScout logo">
+            </div>
             <div class="logo-text">
                 <span class="logo-title">BirthdayScout</span>
                 <span class="logo-subtitle">Freebies, deals & routes</span>
@@ -35,7 +39,7 @@
                     then helps you plan a route so you don’t miss a single freebie.
                 </p>
 
-                <!-- 🔽 NEW: birthday form instead of plain button -->
+                <!-- Birthday form -->
                 <div class="hero-actions">
                     <form id="birthdayForm" class="birthday-form">
                         <label for="birthdayInput">When’s your birthday?</label>
@@ -97,8 +101,18 @@
         Built by Jaden · BirthdayScout – early version for real users & portfolio.
     </footer>
 
-    <!-- 🔽 NEW: script to save birthday & redirect -->
+    <!-- Script: save birthday, show confetti, then redirect -->
     <script>
+        function launchConfetti() {
+            if (typeof confetti !== "function") return;
+
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
         const birthdayForm = document.getElementById('birthdayForm');
 
         if (birthdayForm) {
@@ -110,11 +124,16 @@
                     return;
                 }
 
-                // Save the birthday in localStorage so deals.html can read it
+                // Save the birthday locally
                 localStorage.setItem('birthdayScoutBirthday', birthdayInput.value);
 
-                // Go to the deals page
-                window.location.href = 'deals.html';
+                // Fire confetti 🎉
+                launchConfetti();
+
+                // Small delay so people see the confetti, then go to deals
+                setTimeout(function () {
+                    window.location.href = 'deals.html';
+                }, 800);
             });
         }
     </script>
