@@ -37,24 +37,38 @@ async function loadDeals() {
     const deals = await response.json();
 
     function render() {
-        const city = cityFilter ? cityFilter.value : "";
-        const type = typeFilter ? typeFilter.value : "";
+        const cityValue = cityFilter ? cityFilter.value : "";
+        const typeValue = typeFilter ? typeFilter.value : "";
 
-        const filtered = deals.filter(d =>
-            (city === "" || d.city === city) &&
-            (type === "" || d.type === type)
-        );
+        const filtered = deals.filter(d => {
+            // Support both old keys and new keys
+            const city = d.city || d.location_city || "";
+            const type = d.type || d.category || "";
 
-        dealList.innerHTML = filtered.map(d => `
-            <div class="deal-card">
-                <h3>${d.name}</h3>
-                <p><strong>City:</strong> ${d.city}</p>
-                <p><strong>Type:</strong> ${d.type}</p>
-                <p><strong>Freebie:</strong> ${d.freebie}</p>
-                <p><strong>Conditions:</strong> ${d.conditions}</p>
-                <a href="${d.link}" target="_blank" class="btn">View offer</a>
-            </div>
-        `).join("");
+            return (cityValue === "" || city === cityValue) &&
+                   (typeValue === "" || type === typeValue);
+        });
+
+        dealList.innerHTML = filtered.map(d => {
+            // Safely map both schemas:
+            const name = d.name || d.brand || "Unknown place";
+            const city = d.city || d.location_city || "Unknown";
+            const type = d.type || d.category || "Other";
+            const freebie = d.freebie || d.deal_title || "Birthday freebie";
+            const conditions = d.conditions || d.requirements || "See location for details";
+            const link = d.link || "#";
+
+            return `
+                <div class="deal-card">
+                    <h3>${name}</h3>
+                    <p><strong>City:</strong> ${city}</p>
+                    <p><strong>Type:</strong> ${type}</p>
+                    <p><strong>Freebie:</strong> ${freebie}</p>
+                    <p><strong>Conditions:</strong> ${conditions}</p>
+                    <a href="${link}" target="_blank" class="btn">View offer</a>
+                </div>
+            `;
+        }).join("");
     }
 
     if (cityFilter) cityFilter.addEventListener("change", render);
