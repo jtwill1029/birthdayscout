@@ -33,10 +33,21 @@
                     BirthdayScout finds birthday deals at restaurants, dessert spots, and activities near you,
                     then helps you plan a route so you don’t miss a single freebie.
                 </p>
+
+                <!-- Birthday form -->
                 <div class="hero-actions">
-                    <a href="deals.html" class="btn-primary">Browse birthday deals</a>
-                    <p class="hero-subtext">No login. Just see what’s free on your day.</p>
+                    <form id="birthdayForm" class="birthday-form">
+                        <label for="birthdayInput">When’s your birthday?</label>
+                        <input type="date" id="birthdayInput" required>
+                        <button type="submit" class="btn-primary">
+                            Find deals for my birthday
+                        </button>
+                    </form>
+                    <p class="hero-subtext">
+                        We only keep your date in this browser to show deals – no account needed.
+                    </p>
                 </div>
+
                 <div class="hero-chips">
                     <span class="chip">🎉 Free desserts</span>
                     <span class="chip">🍝 Birthday dinners</span>
@@ -84,5 +95,23 @@
     <footer class="footer">
         Built by Jaden · BirthdayScout – early version for real users & portfolio.
     </footer>
+
+    <!-- Handle birthday form: save to localStorage and go to deals page -->
+    <script>
+        const birthdayForm = document.getElementById('birthdayForm');
+        if (birthdayForm) {
+            birthdayForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const input = document.getElementById('birthdayInput');
+                if (!input.value) return;
+
+                // Store birthday in localStorage for deals.html to use
+                localStorage.setItem('birthdayScoutBirthday', input.value);
+
+                // Redirect to deals page
+                window.location.href = 'deals.html';
+            });
+        }
+    </script>
 </body>
 </html>
