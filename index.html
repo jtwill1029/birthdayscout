@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>BirthdayScout – Find Birthday Freebies</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Make sure this matches your CSS filename -->
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -34,7 +35,7 @@
                     then helps you plan a route so you don’t miss a single freebie.
                 </p>
 
-                <!-- Birthday form -->
+                <!-- 🔽 NEW: birthday form instead of plain button -->
                 <div class="hero-actions">
                     <form id="birthdayForm" class="birthday-form">
                         <label for="birthdayInput">When’s your birthday?</label>
@@ -96,19 +97,23 @@
         Built by Jaden · BirthdayScout – early version for real users & portfolio.
     </footer>
 
-    <!-- Handle birthday form: save to localStorage and go to deals page -->
+    <!-- 🔽 NEW: script to save birthday & redirect -->
     <script>
         const birthdayForm = document.getElementById('birthdayForm');
+
         if (birthdayForm) {
-            birthdayForm.addEventListener('submit', function (e) {
-                e.preventDefault();
-                const input = document.getElementById('birthdayInput');
-                if (!input.value) return;
+            birthdayForm.addEventListener('submit', function (event) {
+                event.preventDefault();
 
-                // Store birthday in localStorage for deals.html to use
-                localStorage.setItem('birthdayScoutBirthday', input.value);
+                const birthdayInput = document.getElementById('birthdayInput');
+                if (!birthdayInput || !birthdayInput.value) {
+                    return;
+                }
 
-                // Redirect to deals page
+                // Save the birthday in localStorage so deals.html can read it
+                localStorage.setItem('birthdayScoutBirthday', birthdayInput.value);
+
+                // Go to the deals page
                 window.location.href = 'deals.html';
             });
         }
