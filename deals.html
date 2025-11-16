@@ -2,37 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Birthday Deals | BirthdayScout</title>
+    <title>Browse Birthday Deals | BirthdayScout</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <a href="index.html" class="logo">← Back to Home</a>
+    <!-- Shared nav -->
+    <header class="nav">
+        <div class="nav-left">
+            <div class="logo-mark">🎂</div>
+            <div class="logo-text">
+                <span class="logo-title">BirthdayScout</span>
+                <span class="logo-subtitle">Freebies, deals & routes</span>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="deals.html" class="nav-link active">Browse deals</a>
+            <a href="#" class="nav-link muted">How it works</a>
+        </nav>
     </header>
 
-    <main>
-        <h1>Birthday Deals Near You</h1>
+    <main class="page">
+        <section class="deals-header">
+            <div>
+                <h1>Birthday deals near you</h1>
+                <p class="hero-text">
+                    Filter by city and type to see birthday freebies. This is an early list – you can grow it over time.
+                </p>
+            </div>
+        </section>
 
-        <div class="filters">
-            <select id="cityFilter">
-                <option value="">All Cities</option>
-                <option value="Las Vegas">Las Vegas</option>
-                <option value="Henderson">Henderson</option>
-            </select>
+        <!-- Filters row -->
+        <section class="filters-row">
+            <div class="filter-group">
+                <label for="cityFilter">City</label>
+                <select id="cityFilter" class="filter-select">
+                    <option value="">All cities</option>
+                    <option value="Las Vegas">Las Vegas</option>
+                    <option value="Henderson">Henderson</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="typeFilter">Category</label>
+                <select id="typeFilter" class="filter-select">
+                    <option value="">All categories</option>
+                    <option value="Food">Food</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="Activity">Activity</option>
+                </select>
+            </div>
+        </section>
 
-            <select id="typeFilter">
-                <option value="">All Categories</option>
-                <option value="Food">Food</option>
-                <option value="Dessert">Dessert</option>
-                <option value="Activity">Activity</option>
-            </select>
-        </div>
-
-        <div id="dealList" class="deal-list">
-            <!-- Deals will load here dynamically -->
-        </div>
+        <!-- Deals grid -->
+        <section id="dealList" class="deal-grid">
+            <!-- Filled by script.js -->
+        </section>
     </main>
+
+    <footer class="footer">
+        Deals shown are examples. Always verify terms with the business before you go.
+    </footer>
 
     <script src="script.js"></script>
 </body>
