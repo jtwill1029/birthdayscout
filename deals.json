@@ -30,5 +30,109 @@
     "freebie": "Free karaoke room for 1 hour",
     "conditions": "Reservation required",
     "link": "https://example.com"
+  },
+  {
+    "name": "Red Robin",
+    "city": "Las Vegas",
+    "type": "Food",
+    "freebie": "Free Gourmet Burger",
+    "conditions": "Rewards account required; valid during birthday month.",
+    "link": "https://www.redrobin.com"
+  },
+  {
+    "name": "IHOP",
+    "city": "Las Vegas",
+    "type": "Food",
+    "freebie": "Free birthday pancakes",
+    "conditions": "Rewards account required.",
+    "link": "https://www.ihop.com"
+  },
+  {
+    "name": "Black Bear Diner",
+    "city": "Las Vegas",
+    "type": "Food",
+    "freebie": "Free birthday meal",
+    "conditions": "Must join rewards program.",
+    "link": "https://blackbeardiner.com"
+  },
+  {
+    "name": "Chili's",
+    "city": "Las Vegas",
+    "type": "Food",
+    "freebie": "Free birthday dessert",
+    "conditions": "Rewards account required.",
+    "link": "https://www.chilis.com/rewards"
+  },
+  {
+    "name": "Olive Garden",
+    "city": "Las Vegas",
+    "type": "Food",
+    "freebie": "Free birthday dessert",
+    "conditions": "Rewards account required.",
+    "link": "https://www.olivegarden.com"
+  },
+  {
+    "name": "Buffalo Wild Wings",
+    "city": "Las Vegas",
+    "type": "Food",
+    "freebie": "Free birthday wings",
+    "conditions": "Rewards account required.",
+    "link": "https://www.buffalowildwings.com"
+  },
+  {
+    "name": "Texas Roadhouse",
+    "city": "Las Vegas",
+    "type": "Food",
+    "freebie": "Free appetizer or side",
+    "conditions": "Must join their VIP Club.",
+    "link": "https://www.texasroadhouse.com"
+  },
+  {
+    "name": "Baskin-Robbins",
+    "city": "Las Vegas",
+    "type": "Dessert",
+    "freebie": "Free scoop of ice cream",
+    "conditions": "Must join the Birthday Club.",
+    "link": "https://www.baskinrobbins.com"
+  },
+  {
+    "name": "Krispy Kreme",
+    "city": "Las Vegas",
+    "type": "Dessert",
+    "freebie": "Free donut and sometimes free drink",
+    "conditions": "Rewards account required; offers vary by location.",
+    "link": "https://www.krispykreme.com"
+  },
+  {
+    "name": "Dutch Bros",
+    "city": "Las Vegas",
+    "type": "Drink",
+    "freebie": "Free birthday drink",
+    "conditions": "Rewards account required.",
+    "link": "https://www.dutchbros.com"
+  },
+  {
+    "name": "Cold Stone Creamery",
+    "city": "Las Vegas",
+    "type": "Dessert",
+    "freebie": "BOGO free ice cream",
+    "conditions": "Must join My Cold Stone Club.",
+    "link": "https://www.coldstonecreamery.com"
+  },
+  {
+    "name": "Nothing Bundt Cakes",
+    "city": "Las Vegas",
+    "type": "Dessert",
+    "freebie": "Free Bundtlet",
+    "conditions": "Rewards sign-up required.",
+    "link": "https://www.nothingbundtcakes.com"
+  },
+  {
+    "name": "Dave & Buster's",
+    "city": "Las Vegas",
+    "type": "Activity",
+    "freebie": "Free $10 game play",
+    "conditions": "Rewards sign-up required.",
+    "link": "https://www.daveandbusters.com"
   }
 ]
