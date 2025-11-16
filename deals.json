@@ -1,0 +1,26 @@
+[
+    {
+        "name": "BJ's Restaurant & Brewhouse",
+        "city": "Las Vegas",
+        "type": "Dessert",
+        "freebie": "Free Pizookie",
+        "conditions": "No purchase required",
+        "link": "https://www.bjsrestaurants.com/"
+    },
+    {
+        "name": "Denny's",
+        "city": "Las Vegas",
+        "type": "Food",
+        "freebie": "Free Grand Slam",
+        "conditions": "ID required, dine-in only",
+        "link": "https://www.dennys.com/"
+    },
+    {
+        "name": "Señor Blues Karaoke",
+        "city": "Henderson",
+        "type": "Activity",
+        "freebie": "Free karaoke room for 1 hour",
+        "conditions": "Reservation required",
+        "link": "https://example.com"
+    }
+]
