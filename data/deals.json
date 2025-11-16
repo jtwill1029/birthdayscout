@@ -1,1 +1,18 @@
+[
+  {
+    "id": "dennys-grand-slam-bday",
+    "brand": "Denny's",
+    "location_city": "Las Vegas",
+    "location_state": "NV",
+    "category": "Food",
+    "deal_title": "Free Grand Slam breakfast on your birthday",
+    "description": "Free Grand Slam breakfast on your birthday when you show a valid ID. Dine-in only; check with your local Denny's.",
+    "requirements": "Valid ID; dine-in only. Participation may vary by location.",
+    "birthday_window_days": 1,
+    "signup_required": false,
+    "link": "https://www.dennys.com",
+    "verified_at": "2025-11-15",
+    "source_type": "official"
+  }
+]
 
