@@ -8,7 +8,6 @@ function formatBirthday(isoString) {
     const month = Number(parts[1]); // 1–12
     const day = Number(parts[2]);
 
-    // Create a date in local time, not UTC
     const date = new Date(year, month - 1, day);
 
     return date.toLocaleDateString(undefined, {
@@ -28,11 +27,12 @@ async function loadDeals() {
     if (storedBirthday && birthdayBanner) {
         const formatted = formatBirthday(storedBirthday);
         if (formatted) {
-            birthdayBanner.textContent = `Showing deals for your birthday on ${formatted} 🎂`;
+            birthdayBanner.textContent =
+                `Showing deals for your birthday on ${formatted} 🎂`;
         }
     }
 
-    // Fetch the JSON file with deals
+    // Fetch the JSON file with deals (same folder as deals.html)
     const response = await fetch("deals.json");
     const deals = await response.json();
 
@@ -40,22 +40,29 @@ async function loadDeals() {
         const cityValue = cityFilter ? cityFilter.value : "";
         const typeValue = typeFilter ? typeFilter.value : "";
 
-        const filtered = deals.filter(d => {
-            // Support both old keys and new keys
-            const city = d.city || d.location_city || "";
-            const type = d.type || d.category || "";
+        const filtered = deals.filter(raw => {
+            // 1) Make sure it's a real object
+            if (!raw || typeof raw !== "object") return false;
 
-            return (cityValue === "" || city === cityValue) &&
-                   (typeValue === "" || type === typeValue);
+            // 2) Require a name so we don't show "undefined" cards
+            if (!raw.name && !raw.brand) return false;
+
+            const city = raw.city || "";
+            const type = raw.type || "";
+
+            const cityOk = cityValue === "" || city === cityValue;
+            const typeOk = typeValue === "" || type === typeValue;
+
+            return cityOk && typeOk;
         });
 
+        // Build HTML cards
         dealList.innerHTML = filtered.map(d => {
-            // Safely map both schemas:
             const name = d.name || d.brand || "Unknown place";
-            const city = d.city || d.location_city || "Unknown";
-            const type = d.type || d.category || "Other";
-            const freebie = d.freebie || d.deal_title || "Birthday freebie";
-            const conditions = d.conditions || d.requirements || "See location for details";
+            const city = d.city || "Unknown";
+            const type = d.type || "Other";
+            const freebie = d.freebie || "Birthday freebie";
+            const conditions = d.conditions || "See location for details";
             const link = d.link || "#";
 
             return `
