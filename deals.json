@@ -22,5 +22,20 @@
         "freebie": "Free karaoke room for 1 hour",
         "conditions": "Reservation required",
         "link": "https://example.com"
-    }
+    },
+  {
+    "id": "starbucks-bday-drink",
+    "brand": "Starbucks",
+    "location_city": "Las Vegas",
+    "location_state": "NV",
+    "category": "Drink",
+    "deal_title": "Free handcrafted drink on your birthday",
+    "description": "Starbucks gives you one free handcrafted drink, food item, or bottled beverage on your birthday when you are a Starbucks Rewards member.",
+    "requirements": "Must be a Starbucks Rewards member with your birthday added to your profile at least 7 days before. Must have made at least one purchase before your birthday.",
+    "birthday_window_days": 1,
+    "signup_required": true,
+    "link": "https://www.starbucks.com/rewards",
+    "verified_at": "2025-11-15",
+    "source_type": "official"
+  }
 ]
