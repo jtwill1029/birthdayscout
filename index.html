@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="main.css">
 
-    <!-- Confetti library -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- Confetti library (simple CDN URL) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti"></script>
 </head>
 <body>
     <!-- Top nav -->
@@ -106,10 +106,27 @@
         function launchConfetti() {
             if (typeof confetti !== "function") return;
 
+            // Big center burst
             confetti({
-                particleCount: 150,
-                spread: 70,
+                particleCount: 180,
+                spread: 80,
+                startVelocity: 45,
                 origin: { y: 0.6 }
+            });
+
+            // Two side bursts for extra drama
+            confetti({
+                particleCount: 80,
+                angle: 60,
+                spread: 60,
+                origin: { x: 0, y: 0.7 }
+            });
+
+            confetti({
+                particleCount: 80,
+                angle: 120,
+                spread: 60,
+                origin: { x: 1, y: 0.7 }
             });
         }
 
@@ -130,10 +147,10 @@
                 // Fire confetti 🎉
                 launchConfetti();
 
-                // Small delay so people see the confetti, then go to deals
+                // Longer delay so confetti is very visible
                 setTimeout(function () {
                     window.location.href = 'deals.html';
-                }, 800);
+                }, 1200);
             });
         }
     </script>
