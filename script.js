@@ -1,3 +1,22 @@
+// Helper: format "YYYY-MM-DD" as "Month D" without timezone issues
+function formatBirthday(isoString) {
+    if (!isoString) return "";
+    const parts = isoString.split("-");
+    if (parts.length !== 3) return "";
+
+    const year = Number(parts[0]);
+    const month = Number(parts[1]); // 1–12
+    const day = Number(parts[2]);
+
+    // Create a date in local time, not UTC
+    const date = new Date(year, month - 1, day);
+
+    return date.toLocaleDateString(undefined, {
+        month: "long",
+        day: "numeric"
+    });
+}
+
 async function loadDeals() {
     const dealList = document.getElementById("dealList");
     const cityFilter = document.getElementById("cityFilter");
@@ -7,15 +26,10 @@ async function loadDeals() {
     // Show birthday banner if we have one stored
     const storedBirthday = localStorage.getItem("birthdayScoutBirthday");
     if (storedBirthday && birthdayBanner) {
-        const date = new Date(storedBirthday);
-
-        // Format like "March 12"
-        const formatted = date.toLocaleDateString(undefined, {
-            month: "long",
-            day: "numeric"
-        });
-
-        birthdayBanner.textContent = `Showing deals for your birthday on ${formatted} 🎂`;
+        const formatted = formatBirthday(storedBirthday);
+        if (formatted) {
+            birthdayBanner.textContent = `Showing deals for your birthday on ${formatted} 🎂`;
+        }
     }
 
     // Fetch the JSON file with deals
