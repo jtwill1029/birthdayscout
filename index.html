@@ -4,98 +4,85 @@
     <meta charset="UTF-8">
     <title>BirthdayScout – Find Birthday Freebies</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #0f172a;
-            color: #e5e7eb;
-        }
-        header {
-            padding: 1.5rem 1.5rem;
-            background: #020617;
-            border-bottom: 1px solid #1f2937;
-        }
-        .logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: 0.03em;
-        }
-        .tagline {
-            font-size: 0.9rem;
-            color: #9ca3af;
-        }
-        main {
-            max-width: 800px;
-            margin: 2rem auto 4rem;
-            padding: 0 1.5rem;
-            text-align: center;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
-        p {
-            color: #9ca3af;
-            line-height: 1.6;
-        }
-        .cta {
-            margin-top: 2rem;
-            display: inline-flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            align-items: center;
-        }
-        .btn-primary {
-            padding: 0.75rem 1.5rem;
-            border-radius: 999px;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            background: #38bdf8;
-            color: #020617;
-            text-decoration: none;
-        }
-        .btn-primary:hover {
-            opacity: 0.9;
-        }
-        .coming-soon {
-            font-size: 0.85rem;
-            color: #6b7280;
-        }
-        footer {
-            text-align: center;
-            font-size: 0.8rem;
-            color: #6b7280;
-            margin-bottom: 1.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="logo">BirthdayScout</div>
-        <div class="tagline">Find birthday freebies, deals, and routes – all in one place.</div>
+    <!-- Top nav -->
+    <header class="nav">
+        <div class="nav-left">
+            <div class="logo-mark">🎂</div>
+            <div class="logo-text">
+                <span class="logo-title">BirthdayScout</span>
+                <span class="logo-subtitle">Freebies, deals & routes</span>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="deals.html" class="nav-link">Browse deals</a>
+            <a href="#" class="nav-link muted">How it works</a>
+        </nav>
     </header>
 
-    <main>
-        <h1>Birthday freebies, without the chaos.</h1>
-        <p>
-            BirthdayScout will help you discover birthday deals at restaurants, dessert spots, and activities
-            near you – then plan a route so you can hit them all in one day.
-        </p>
-        <div class="cta">
-    <a class="btn-primary" href="deals.html">👉 CLICK HERE TO SEE DEALS 👈</a>
-    <div class="coming-soon">
-        Deals page is LIVE now.
-    </div>
-</div>
+    <!-- Hero section -->
+    <main class="page">
+        <section class="hero">
+            <div class="hero-left">
+                <p class="eyebrow">Birthday planning, upgraded.</p>
+                <h1>Hit every birthday freebie in one smooth route.</h1>
+                <p class="hero-text">
+                    BirthdayScout finds birthday deals at restaurants, dessert spots, and activities near you,
+                    then helps you plan a route so you don’t miss a single freebie.
+                </p>
+                <div class="hero-actions">
+                    <a href="deals.html" class="btn-primary">Browse birthday deals</a>
+                    <p class="hero-subtext">No login. Just see what’s free on your day.</p>
+                </div>
+                <div class="hero-chips">
+                    <span class="chip">🎉 Free desserts</span>
+                    <span class="chip">🍝 Birthday dinners</span>
+                    <span class="chip">🕹 Activities & fun</span>
+                </div>
+            </div>
 
+            <div class="hero-right">
+                <div class="hero-card">
+                    <div class="hero-card-header">
+                        <span class="hero-tag">Sample route</span>
+                        <span class="hero-day">Your birthday · Las Vegas</span>
+                    </div>
+                    <ol class="hero-route">
+                        <li>
+                            <span class="route-dot">1</span>
+                            <div>
+                                <div class="route-title">Starbucks</div>
+                                <div class="route-detail">Free birthday drink</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="route-dot">2</span>
+                            <div>
+                                <div class="route-title">BJ’s Restaurant</div>
+                                <div class="route-detail">Free Pizookie dessert</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="route-dot">3</span>
+                            <div>
+                                <div class="route-title">Denny’s</div>
+                                <div class="route-detail">Free Grand Slam breakfast</div>
+                            </div>
+                        </li>
+                    </ol>
+                    <p class="hero-small">
+                        This is a mock example route. Real deals may vary by location and terms.
+                    </p>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        Built by Jaden – early version for real users and portfolio. 
+    <footer class="footer">
+        Built by Jaden · BirthdayScout – early version for real users & portfolio.
     </footer>
 </body>
 </html>
