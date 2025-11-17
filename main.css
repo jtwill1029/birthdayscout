@@ -50,6 +50,13 @@ body {
     background: linear-gradient(135deg, #f97316, #ec4899);
     color: #fff;
     font-size: 1.3rem;
+    overflow: hidden;
+}
+
+.logo-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .logo-text {
@@ -104,6 +111,22 @@ body {
     margin-top: 1.5rem;
 }
 
+.hero-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.hero-illustration {
+    width: 100%;
+    max-width: 380px;
+    max-height: 320px;
+    border-radius: 1.5rem;
+    display: block;
+    object-fit: cover;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
 .eyebrow {
     font-size: 0.9rem;
     font-weight: 600;
@@ -114,7 +137,7 @@ body {
 }
 
 .hero h1 {
-    font-size: clamp(2rem, 3vw, 2.7rem);
+    font-size: clamp(2rem, 3vw, 2.5rem);
     margin: 0 0 0.75rem;
 }
 
@@ -136,7 +159,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.9rem 1.7rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 999px;
     border: none;
     cursor: pointer;
@@ -145,7 +168,7 @@ body {
     background: linear-gradient(135deg, #f97316, #ec4899);
     color: white;
     text-decoration: none;
-    box-shadow: 0 8px 24px rgba(236, 72, 153, 0.45);
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
 }
 
 .btn-primary:hover {
@@ -165,7 +188,7 @@ body {
 }
 
 .chip {
-    padding: 0.45rem 0.9rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 999px;
     background: #fff;
     border: 1px solid #e5e7eb;
@@ -190,28 +213,86 @@ body {
 }
 
 .birthday-form input[type="date"] {
-    padding: 0.6rem 0.9rem;
+    padding: 0.5rem 0.75rem;
     border-radius: 0.75rem;
     border: 1px solid #d1d5db;
     font-size: 0.9rem;
 }
 
-/* Hero right image */
+/* (Old hero card styles – safe to keep if you ever bring it back) */
 
-.hero-right {
-    display: flex;
-    justify-content: center;
-}
-
-.hero-illustration {
+.hero-card {
     width: 100%;
-    max-width: 460px;
-    border-radius: 1.5rem;
-    display: block;
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+    max-width: 340px;
+    border-radius: 1.25rem;
+    background: radial-gradient(circle at top left, #fdf2f8, #eef2ff);
+    padding: 1.25rem 1.25rem 1rem;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.15);
 }
 
-/* Deals page header */
+.hero-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.hero-tag {
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: #111827;
+    color: #f9fafb;
+    font-size: 0.75rem;
+}
+
+.hero-day {
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
+.hero-route {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0.75rem;
+}
+
+.hero-route li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.route-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #111827;
+    color: #f9fafb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.route-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.route-detail {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.hero-small {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+/* Deals page */
 
 .deals-header {
     margin-top: 1.75rem;
@@ -330,6 +411,16 @@ body {
 @media (max-width: 768px) {
     .hero {
         grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero-right {
+        justify-content: center;
+        margin-top: 1.5rem;
+    }
+
+    .hero-illustration {
+        max-width: 320px;
+        max-height: 260px;
     }
 
     .nav {
