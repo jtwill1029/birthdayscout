@@ -104,17 +104,30 @@
 
         // Detect impossible dates
         function isImpossibleBirthday(dateString) {
-            if (!dateString || !/^\d{4}-\d{2}-\d{2}$/.test(dateString)) return true;
+    // Missing / wrong format → impossible
+    if (!dateString || !/^\d{4}-\d{2}-\d{2}$/.test(dateString)) return true;
 
-            const [year, month, day] = dateString.split("-").map(Number);
-            const testDate = new Date(year, month - 1, day);
+    const [year, month, day] = dateString.split("-").map(Number);
+    const testDate = new Date(year, month - 1, day);
 
-            return !(
-                testDate.getFullYear() === year &&
-                testDate.getMonth() === month - 1 &&
-                testDate.getDate() === day
-            );
-        }
+    // Check if it's a real calendar date
+    const isRealDate =
+        testDate.getFullYear() === year &&
+        testDate.getMonth() === month - 1 &&
+        testDate.getDate() === day;
+
+    if (!isRealDate) return true;
+
+    // Now apply a realistic human-birthday range
+    const now = new Date();
+    const currentYear = now.getFullYear();
+
+    // Treat years before 1900 or after this year as "impossible"
+    if (year < 1900 || year > currentYear) return true;
+
+    // Otherwise, it's fine
+    ret
+
 
         const birthdayForm = document.getElementById("birthdayForm");
         const heroImage = document.querySelector(".hero-illustration");
