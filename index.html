@@ -52,16 +52,10 @@
                         </button>
                     </form>
 
-                    <!-- Alien error message for impossible birthdays -->
-                    <div id="birthdayError" class="birthday-error hidden">
-                        <img
-                            src="images/alien-confused.png"
-                            alt="Confused alien"
-                            class="birthday-error-img">
-                        <p class="birthday-error-text">
-                            Uhh… that’s not a real date. Are you secretly an alien? 👽
-                        </p>
-                    </div>
+                    <!-- Small alien text error -->
+                    <p id="birthdayError" class="birthday-error-text hidden">
+                        Uhh… that’s not a real date. Are you secretly an alien? 👽
+                    </p>
 
                     <p class="hero-subtext">
                         We only keep your date in this browser to show deals – no account needed.
@@ -77,19 +71,18 @@
 
             <!-- Right image -->
             <div class="hero-right">
-    <!-- Normal image (default state) -->
-    <img src="images/birthday-hero.png"
-         alt="Friends celebrating a birthday"
-         class="hero-illustration"
-         id="heroDefault">
+                <!-- Default hero -->
+                <img src="images/birthday-hero.png"
+                     alt="Friends celebrating a birthday"
+                     class="hero-illustration"
+                     id="heroDefault">
 
-    <!-- Alien image (hidden until error) -->
-    <img src="images/alien-confused.png"
-         alt="Confused alien looking at a weird birthday date"
-         class="hero-illustration hidden"
-         id="heroAlien">
-</div>
-
+                <!-- Alien hero (hidden by default) -->
+                <img src="images/alien-confused.png"
+                     alt="Confused alien"
+                     class="hero-illustration hidden"
+                     id="heroAlien">
+            </div>
         </section>
     </main>
 
@@ -97,12 +90,11 @@
         Built by Jaden · BirthdayScout – early version for real users & portfolio.
     </footer>
 
-    <!-- Script: validate birthday, save birthday, show confetti, then redirect -->
+    <!-- SCRIPT -->
     <script>
         function launchConfetti() {
             if (typeof confetti !== "function") return;
 
-            // Big center burst
             confetti({
                 particleCount: 180,
                 spread: 80,
@@ -110,7 +102,6 @@
                 origin: { y: 0.6 }
             });
 
-            // Side bursts
             confetti({
                 particleCount: 80,
                 angle: 60,
@@ -126,7 +117,7 @@
             });
         }
 
-        // Decide if a birthday is "impossible"
+        // Birthday validation
         function isImpossibleBirthday(isoValue) {
             if (!isoValue) return true;
 
@@ -142,59 +133,58 @@
 
             const today = new Date();
 
-            // Too far in the past or in the future = alien 😈
             if (year < 1900) return true;
             if (date > today) return true;
 
             return false;
         }
 
-        const birthdayForm = document.getElementById('birthdayForm');
-        const birthdayInput = document.getElementById('birthdayInput');
-        const birthdayError = document.getElementById('birthdayError');
+        const birthdayForm  = document.getElementById("birthdayForm");
+        const birthdayInput = document.getElementById("birthdayInput");
+        const birthdayError = document.getElementById("birthdayError");
 
-        if (birthdayInput && birthdayError) {
-            // Hide the error as soon as the user fixes the date
-            birthdayInput.addEventListener('input', function () {
-                if (!isImpossibleBirthday(birthdayInput.value)) {
-                    birthdayError.classList.add('hidden');
-                }
-            });
+        const heroDefault = document.getElementById("heroDefault");
+        const heroAlien   = document.getElementById("heroAlien");
+
+        function showAlien() {
+            birthdayError.classList.remove("hidden");
+            heroDefault.classList.add("hidden");
+            heroAlien.classList.remove("hidden");
         }
 
-        if (birthdayForm) {
-            birthdayForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                if (!birthdayInput) return;
-
-                const value = birthdayInput.value;
-
-                // Check for alien birthdays
-                if (isImpossibleBirthday(value)) {
-                    if (birthdayError) {
-                        birthdayError.classList.remove('hidden');
-                    }
-                    return; // Don't move on to deals page
-                }
-
-                // Valid human birthday: make sure error is hidden
-                if (birthdayError) {
-                    birthdayError.classList.add('hidden');
-                }
-
-                // Save the birthday locally
-                localStorage.setItem('birthdayScoutBirthday', value);
-
-                // Fire confetti 🎉
-                launchConfetti();
-
-                // Delay so confetti is visible, then go to deals
-                setTimeout(() => {
-                    window.location.href = 'deals.html';
-                }, 1200);
-            });
+        function showNormal() {
+            birthdayError.classList.add("hidden");
+            heroDefault.classList.remove("hidden");
+            heroAlien.classList.add("hidden");
         }
+
+        // Live validation (typing)
+        birthdayInput.addEventListener("input", () => {
+            if (!isImpossibleBirthday(birthdayInput.value)) {
+                showNormal();
+            }
+        });
+
+        // Submit handler
+        birthdayForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const value = birthdayInput.value;
+            if (isImpossibleBirthday(value)) {
+                showAlien();
+                return;
+            }
+
+            showNormal();
+
+            localStorage.setItem("birthdayScoutBirthday", value);
+
+            launchConfetti();
+
+            setTimeout(() => {
+                window.location.href = "deals.html";
+            }, 1200);
+        });
     </script>
 
 </body>
