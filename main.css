@@ -1,26 +1,23 @@
+/* Hide helper */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
-.birthday-error {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-top: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-radius: 12px;
-    background: #fff3ff;
-    border: 1px solid #f3cfff;
-    font-size: 0.9rem;
-}
-
-.birthday-error-img {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-    border-radius: 50%;
-}
-
+/* Small alien text below the input */
 .birthday-error-text {
-    margin: 0;
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #b047a1;
+    background: #ffe8ff;
+    border: 1px solid #f3cfff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 360px;
+}
+
+/* Hero images */
+.hero-illustration {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 16px;
 }
