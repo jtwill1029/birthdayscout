@@ -219,79 +219,6 @@ body {
     font-size: 0.9rem;
 }
 
-/* (Old hero card styles – safe to keep if you ever bring it back) */
-
-.hero-card {
-    width: 100%;
-    max-width: 340px;
-    border-radius: 1.25rem;
-    background: radial-gradient(circle at top left, #fdf2f8, #eef2ff);
-    padding: 1.25rem 1.25rem 1rem;
-    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.15);
-}
-
-.hero-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-    font-size: 0.85rem;
-}
-
-.hero-tag {
-    padding: 0.25rem 0.6rem;
-    border-radius: 999px;
-    background: #111827;
-    color: #f9fafb;
-    font-size: 0.75rem;
-}
-
-.hero-day {
-    color: #6b7280;
-    font-size: 0.8rem;
-}
-
-.hero-route {
-    list-style: none;
-    padding: 0;
-    margin: 0.5rem 0 0.75rem;
-}
-
-.hero-route li {
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
-    padding: 0.5rem 0;
-}
-
-.route-dot {
-    width: 24px;
-    height: 24px;
-    border-radius: 999px;
-    background: #111827;
-    color: #f9fafb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.route-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-.route-detail {
-    font-size: 0.8rem;
-    color: #6b7280;
-}
-
-.hero-small {
-    font-size: 0.75rem;
-    color: #9ca3af;
-}
-
 /* Deals page */
 
 .deals-header {
@@ -367,16 +294,28 @@ body {
     overflow: hidden;
 }
 
-/* New: image at top of each card */
+/* FIXED CENTERED CAKE IMAGE SECTION */
+
+.deal-image-wrapper {
+    width: 100%;
+    height: 140px;
+    border-radius: 0.75rem;
+    background: #fff8ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 0.6rem;
+}
 
 .deal-image {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 0.75rem;
-    margin-bottom: 0.6rem;
+    max-width: 70%;
+    max-height: 70%;
+    object-fit: contain;
     display: block;
 }
+
+/* Deal card text */
 
 .deal-card h3 {
     margin: 0 0 0.25rem;
@@ -400,53 +339,4 @@ body {
     border-radius: 999px;
     text-decoration: none;
     font-size: 0.85rem;
-    font-weight: 600;
-    background: #111827;
-    color: #f9fafb;
-}
-
-.deal-card .btn:hover {
-    opacity: 0.95;
-}
-
-/* Footer */
-
-.footer {
-    text-align: center;
-    font-size: 0.8rem;
-    color: #9ca3af;
-    padding: 1.5rem 1rem 2rem;
-}
-
-/* Responsive */
-
-@media (max-width: 768px) {
-    .hero {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .hero-right {
-        justify-content: center;
-        margin-top: 1.5rem;
-    }
-
-    .hero-illustration {
-        max-width: 320px;
-        max-height: 260px;
-    }
-
-    .nav {
-        flex-wrap: wrap;
-        gap: 0.75rem;
-    }
-
-    .nav-links {
-        width: 100%;
-        justify-content: flex-start;
-        overflow-x: auto;
-    }
-
-    .filters-row {
-        border-radius: 1rem;
-    }
-}
+    font-wei
