@@ -36,6 +36,16 @@ async function loadDeals() {
     const response = await fetch("deals.json");
     const deals = await response.json();
 
+    // Default images by type (used if a deal has no explicit image)
+    const typeImages = {
+        "Food": "images/deals/default-food.jpg",
+        "Dessert": "images/deals/default-dessert.jpg",
+        "Drink": "images/deals/default-drink.jpg",
+        "Activity": "images/deals/default-activity.jpg",
+        "Beauty": "images/deals/default-beauty.jpg",
+        "Retail": "images/deals/default-retail.jpg"
+    };
+
     function render() {
         const cityValue = cityFilter ? cityFilter.value : "";
         const typeValue = typeFilter ? typeFilter.value : "";
@@ -65,8 +75,17 @@ async function loadDeals() {
             const conditions = d.conditions || "See location for details";
             const link = d.link || "#";
 
+            // If this deal has a custom image, use it;
+            // otherwise fall back to a generic based on type,
+            // and finally to a global default.
+            const imgSrc =
+                d.image ||
+                typeImages[type] ||
+                "images/deals/default.jpg";
+
             return `
                 <div class="deal-card">
+                    <img class="deal-image" src="${imgSrc}" alt="${name}">
                     <h3>${name}</h3>
                     <p><strong>City:</strong> ${city}</p>
                     <p><strong>Type:</strong> ${type}</p>
