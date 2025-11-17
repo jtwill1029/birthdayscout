@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="main.css">
 
-    <!-- Confetti library (for a little celebration when they start) -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
-
 <body>
     <!-- Top nav -->
     <header class="nav">
         <div class="nav-left">
-            <div class="logo-mark">🎂</div>
+            <div class="logo-mark">
+                <img src="logo.png" alt="BirthdayScout logo">
+            </div>
             <div class="logo-text">
                 <span class="logo-title">BirthdayScout</span>
                 <span class="logo-subtitle">Freebies, deals & routes</span>
             </div>
         </div>
-
         <nav class="nav-links">
             <a href="index.html" class="nav-link active">Home</a>
             <a href="deals.html" class="nav-link">Browse deals</a>
@@ -28,97 +28,114 @@
         </nav>
     </header>
 
+    <!-- Hero section -->
     <main class="page">
-        <!-- Hero -->
         <section class="hero">
-            <!-- Left: copy + birthday form -->
-            <div>
+            <div class="hero-left">
                 <p class="eyebrow">Birthday planning, upgraded.</p>
                 <h1>Hit every birthday freebie in one smooth route.</h1>
                 <p class="hero-text">
-                    BirthdayScout finds birthday deals at restaurants, dessert spots, and activities
-                    near you, then helps you plan a route so you don’t miss a single freebie.
+                    BirthdayScout finds birthday deals at restaurants, dessert spots, and activities near you,
+                    then helps you plan a route so you don’t miss a single freebie.
                 </p>
 
+                <!-- Birthday form -->
                 <div class="hero-actions">
                     <form id="birthdayForm" class="birthday-form">
                         <label for="birthdayInput">When’s your birthday?</label>
-                        <input
-                            id="birthdayInput"
-                            type="date"
-                            required
-                        >
+                        <input type="date" id="birthdayInput" required>
                         <button type="submit" class="btn-primary">
                             Find deals for my birthday
                         </button>
                     </form>
-
                     <p class="hero-subtext">
-                        We’ll save your date on this device only, then show deals that match on the next page.
+                        We only keep your date in this browser to show deals – no account needed.
                     </p>
+                </div>
 
-                    <div class="hero-chips">
-                        <span class="chip">🎁 Free meals</span>
-                        <span class="chip">🍰 Dessert freebies</span>
-                        <span class="chip">🎟️ Fun activities</span>
-                        <span class="chip">🗺️ Route planning coming soon</span>
-                    </div>
+                <div class="hero-chips">
+                    <span class="chip">🎉 Free desserts</span>
+                    <span class="chip">🍝 Birthday dinners</span>
+                    <span class="chip">🕹 Activities & fun</span>
                 </div>
             </div>
 
-            <!-- Right: hero illustration -->
             <div class="hero-right">
-                <!-- TODO: update the src to whatever your hero image is actually named -->
-                <img
-                    src="images/hero-questions.png"
-                    alt="Colorful illustration with question marks about birthday freebies"
-                    class="hero-illustration"
-                >
+                <div class="hero-card">
+                    <div class="hero-card-header">
+                        <span class="hero-tag">Sample route</span>
+                        <span class="hero-day">Your birthday · Las Vegas</span>
+                    </div>
+                    <ol class="hero-route">
+                        <li>
+                            <span class="route-dot">1</span>
+                            <div>
+                                <div class="route-title">Starbucks</div>
+                                <div class="route-detail">Free birthday drink</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="route-dot">2</span>
+                            <div>
+                                <div class="route-title">BJ’s Restaurant</div>
+                                <div class="route-detail">Free Pizookie dessert</div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="route-dot">3</span>
+                            <div>
+                                <div class="route-title">Denny’s</div>
+                                <div class="route-detail">Free Grand Slam breakfast</div>
+                            </div>
+                        </li>
+                    </ol>
+                    <p class="hero-small">
+                        This is a mock example route. Real deals may vary by location and terms.
+                    </p>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        Built as a fun side project. Always double-check deals with the business before you go.
+        Built by Jaden · BirthdayScout – early version for real users & portfolio.
     </footer>
 
-    <!-- Inline script: save birthday + send user to deals page -->
+    <!-- Script: save birthday, show confetti, then redirect -->
     <script>
-        (function () {
-            const form = document.getElementById("birthdayForm");
-            const input = document.getElementById("birthdayInput");
+        function launchConfetti() {
+            if (typeof confetti !== "function") return;
 
-            if (!form || !input) return;
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
 
-            form.addEventListener("submit", function (event) {
+        const birthdayForm = document.getElementById('birthdayForm');
+
+        if (birthdayForm) {
+            birthdayForm.addEventListener('submit', function (event) {
                 event.preventDefault();
 
-                const value = input.value;
-                if (!value) {
-                    alert("Please pick your birthday first.");
+                const birthdayInput = document.getElementById('birthdayInput');
+                if (!birthdayInput || !birthdayInput.value) {
                     return;
                 }
 
-                // Save birthday so deals page can show a banner
-                try {
-                    localStorage.setItem("birthdayScoutBirthday", value);
-                } catch (e) {
-                    // If storage fails, just ignore and continue
-                }
+                // Save the birthday locally
+                localStorage.setItem('birthdayScoutBirthday', birthdayInput.value);
 
-                // Little confetti burst for fun (if the library loaded)
-                if (window.confetti) {
-                    window.confetti({
-                        particleCount: 80,
-                        spread: 70,
-                        origin: { y: 0.7 }
-                    });
-                }
+                // Fire confetti 🎉
+                launchConfetti();
 
-                // Go to deals page
-                window.location.href = "deals.html";
+                // Small delay so people see the confetti, then go to deals
+                setTimeout(function () {
+                    window.location.href = 'deals.html';
+                }, 800);
             });
-        })();
+        }
     </script>
 </body>
 </html>
