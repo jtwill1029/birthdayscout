@@ -1,23 +1,412 @@
-/* Hide helper */
-.hidden {
-    display: none !important;
+/* Global layout */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-/* Small alien text below the input */
-.birthday-error-text {
-    margin-top: 8px;
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f5f5f7;
+    color: #111827;
+}
+
+.page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+}
+
+/* Nav */
+
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem;
+    background: #ffffffcc;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f97316, #ec4899);
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.logo-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.logo-subtitle {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.95rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #4b5563;
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+}
+
+.nav-link:hover {
+    background: #f3f4f6;
+}
+
+.nav-link.active {
+    background: #111827;
+    color: #f9fafb;
+}
+
+.nav-link.muted {
+    color: #9ca3af;
+}
+
+/* Hero */
+
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.eyebrow {
     font-size: 0.9rem;
-    color: #b047a1;
-    background: #ffe8ff;
-    border: 1px solid #f3cfff;
-    padding: 8px 12px;
-    border-radius: 10px;
-    max-width: 360px;
+    font-weight: 600;
+    color: #f97316;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
 }
 
-/* Hero images */
-.hero-illustration {
+.hero h1 {
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    margin: 0 0 0.75rem;
+}
+
+.hero-text {
+    font-size: 0.98rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.hero-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.98rem;
+    background: linear-gradient(135deg, #f97316, #ec4899);
+    color: white;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
+}
+
+.btn-primary:hover {
+    opacity: 0.95;
+}
+
+.hero-subtext {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.hero-chips {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.chip {
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    font-size: 0.8rem;
+    color: #4b5563;
+}
+
+/* Birthday form inside hero */
+
+.birthday-form {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.birthday-form label {
+    font-size: 0.9rem;
+    color: #4b5563;
+    flex-basis: 100%;
+}
+
+.birthday-form input[type="date"] {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
+    border: 1px solid #d1d5db;
+    font-size: 0.9rem;
+}
+
+/* Hero right card */
+
+.hero-right {
+    display: flex;
+    justify-content: center;
+}
+
+.hero-card {
     width: 100%;
-    max-width: 450px;
-    border-radius: 16px;
+    max-width: 340px;
+    border-radius: 1.25rem;
+    background: radial-gradient(circle at top left, #fdf2f8, #eef2ff);
+    padding: 1.25rem 1.25rem 1rem;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.15);
+}
+
+.hero-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.hero-tag {
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    background: #111827;
+    color: #f9fafb;
+    font-size: 0.75rem;
+}
+
+.hero-day {
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
+.hero-route {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0.75rem;
+}
+
+.hero-route li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.route-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #111827;
+    color: #f9fafb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.route-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.route-detail {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.hero-small {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+/* Deals page */
+
+.deals-header {
+    margin-top: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.deals-header h1 {
+    margin: 0 0 0.4rem;
+}
+
+/* Birthday banner on deals page */
+
+.birthday-banner {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    font-size: 0.85rem;
+    color: #7c2d12;
+}
+
+/* Filters row */
+
+.filters-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 0.75rem;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.06);
+    border: 1px solid #e5e7eb;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+}
+
+.filter-group label {
+    color: #6b7280;
+}
+
+.filter-select {
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.9rem;
+    background: #f9fafb;
+    color: #111827;
+}
+
+/* Deals grid */
+
+.deal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.deal-card {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 0.9rem 1rem 1rem;
+    box-shadow: 0 10px 18px rgba(15, 23, 42, 0.06);
+    border: 1px solid #e5e7eb;
+}
+
+.deal-card h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+}
+
+.deal-card p {
+    margin: 0.1rem 0;
+    font-size: 0.86rem;
+    color: #4b5563;
+}
+
+.deal-card p strong {
+    color: #111827;
+}
+
+.deal-card .btn {
+    display: inline-block;
+    margin-top: 0.6rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: #111827;
+    color: #f9fafb;
+}
+
+.deal-card .btn:hover {
+    opacity: 0.95;
+}
+
+/* Footer */
+
+.footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    padding: 1.5rem 1rem 2rem;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .nav {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+    }
+
+    .filters-row {
+        border-radius: 1rem;
+    }
 }
