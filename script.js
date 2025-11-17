@@ -32,11 +32,11 @@ async function loadDeals() {
         }
     }
 
-    // Fetch the JSON file with deals (same folder as deals.html)
+    // Fetch the deals JSON
     const response = await fetch("deals.json");
     const deals = await response.json();
 
-    // Default images by type (used if a deal has no explicit image)
+    // Default images by type
     const typeImages = {
         "Food": "images/deals/default-food.jpg",
         "Dessert": "images/deals/default-dessert.jpg",
@@ -50,34 +50,27 @@ async function loadDeals() {
         const cityValue = cityFilter ? cityFilter.value : "";
         const typeValue = typeFilter ? typeFilter.value : "";
 
-        const filtered = deals.filter(raw => {
-            // 1) Make sure it's a real object
-            if (!raw || typeof raw !== "object") return false;
+        const filtered = deals.filter(d => {
+            if (!d || typeof d !== "object") return false;
 
-            // 2) Require a name so we don't show "undefined" cards
-            if (!raw.name && !raw.brand) return false;
+            const city = d.city || "";
+            const type = d.type || "";
 
-            const city = raw.city || "";
-            const type = raw.type || "";
-
-            const cityOk = cityValue === "" || city === cityValue;
-            const typeOk = typeValue === "" || type === typeValue;
+            const cityOk = !cityValue || city === cityValue;
+            const typeOk = !typeValue || type === typeValue;
 
             return cityOk && typeOk;
         });
 
-        // Build HTML cards
+        // Build cards with the CORRECT image-wrapper layout
         dealList.innerHTML = filtered.map(d => {
-            const name = d.name || d.brand || "Unknown place";
+            const name = d.name || "Unknown place";
             const city = d.city || "Unknown";
             const type = d.type || "Other";
             const freebie = d.freebie || "Birthday freebie";
             const conditions = d.conditions || "See location for details";
             const link = d.link || "#";
 
-            // If this deal has a custom image, use it;
-            // otherwise fall back to a generic based on type,
-            // and finally to a global default.
             const imgSrc =
                 d.image ||
                 typeImages[type] ||
@@ -85,7 +78,9 @@ async function loadDeals() {
 
             return `
                 <div class="deal-card">
-                    <img class="deal-image" src="${imgSrc}" alt="${name}">
+                    <div class="deal-image-wrapper">
+                        <img class="deal-image" src="${imgSrc}" alt="${name}">
+                    </div>
                     <h3>${name}</h3>
                     <p><strong>City:</strong> ${city}</p>
                     <p><strong>Type:</strong> ${type}</p>
