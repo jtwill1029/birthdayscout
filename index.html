@@ -52,6 +52,17 @@
                         </button>
                     </form>
 
+                    <!-- Alien error message for impossible birthdays -->
+                    <div id="birthdayError" class="birthday-error hidden">
+                        <img
+                            src="images/alien-confused.png"
+                            alt="Confused alien"
+                            class="birthday-error-img">
+                        <p class="birthday-error-text">
+                            Uhh… that’s not a real date. Are you secretly an alien? 👽
+                        </p>
+                    </div>
+
                     <p class="hero-subtext">
                         We only keep your date in this browser to show deals – no account needed.
                     </p>
@@ -77,7 +88,7 @@
         Built by Jaden · BirthdayScout – early version for real users & portfolio.
     </footer>
 
-    <!-- Script: save birthday, show confetti, then redirect -->
+    <!-- Script: validate birthday, save birthday, show confetti, then redirect -->
     <script>
         function launchConfetti() {
             if (typeof confetti !== "function") return;
@@ -106,17 +117,65 @@
             });
         }
 
+        // Decide if a birthday is "impossible"
+        function isImpossibleBirthday(isoValue) {
+            if (!isoValue) return true;
+
+            const parts = isoValue.split("-");
+            if (parts.length !== 3) return true;
+
+            const year = Number(parts[0]);
+            const month = Number(parts[1]);
+            const day = Number(parts[2]);
+
+            const date = new Date(year, month - 1, day);
+            if (isNaN(date.getTime())) return true;
+
+            const today = new Date();
+
+            // Too far in the past or in the future = alien 😈
+            if (year < 1900) return true;
+            if (date > today) return true;
+
+            return false;
+        }
+
         const birthdayForm = document.getElementById('birthdayForm');
+        const birthdayInput = document.getElementById('birthdayInput');
+        const birthdayError = document.getElementById('birthdayError');
+
+        if (birthdayInput && birthdayError) {
+            // Hide the error as soon as the user fixes the date
+            birthdayInput.addEventListener('input', function () {
+                if (!isImpossibleBirthday(birthdayInput.value)) {
+                    birthdayError.classList.add('hidden');
+                }
+            });
+        }
 
         if (birthdayForm) {
             birthdayForm.addEventListener('submit', function(event) {
                 event.preventDefault();
 
-                const birthdayInput = document.getElementById('birthdayInput');
-                if (!birthdayInput || !birthdayInput.value) return;
+                if (!birthdayInput) return;
+
+                const value = birthdayInput.value;
+
+                // Check for alien birthdays
+                if (isImpossibleBirthday(value)) {
+                    if (birthdayError) {
+                        birthdayError.classList.remove('hidden');
+                    }
+                    return; // Don't move on to deals page
+                }
+
+                // Valid human birthday: make sure error is hidden
+                if (birthdayError) {
+                    birthdayError.classList.add('hidden');
+                }
 
                 // Save the birthday locally
-                localStorage.setItem('birthdayScoutBirthday', birthdayInput.value);
+                localStorage.setItem('birthdayScoutBirthday', value);
 
                 // Fire confetti 🎉
                 launchConfetti();
