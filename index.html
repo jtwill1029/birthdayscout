@@ -40,18 +40,20 @@
                     BirthdayScout finds birthday deals at restaurants, dessert spots, and activities
                     near you, then helps you plan a route so you don’t miss a single freebie.
                 </p>
-<p id="birthdayError" style="
-    display:none;
-    color:#b91c1c;
-    background:#fee2e2;
-    padding:0.5rem 0.75rem;
-    border-radius:0.75rem;
-    font-size:0.85rem;
-    border:1px solid #fecaca;
-    margin-top:0.5rem;
-">
-    ❌ That date doesn’t exist. The universe is confused too.
-</p>
+
+                <!-- Error message -->
+                <p id="birthdayError" style="
+                    display:none;
+                    color:#b91c1c;
+                    background:#fee2e2;
+                    padding:0.5rem 0.75rem;
+                    border-radius:0.75rem;
+                    font-size:0.85rem;
+                    border:1px solid #fecaca;
+                    margin-top:0.5rem;
+                ">
+                    ❌ That date doesn’t exist. The universe is confused too.
+                </p>
 
                 <!-- Birthday form -->
                 <div class="hero-actions">
@@ -89,103 +91,62 @@
         Built by Jaden · BirthdayScout – early version for real users & portfolio.
     </footer>
 
-    <!-- Script: save birthday, show confetti, then redirect -->
+    <!-- WORKING SCRIPT -->
     <script>
+        // Confetti function
         function launchConfetti() {
             if (typeof confetti !== "function") return;
 
-            // Big center burst
-            confetti({
-                particleCount: 180,
-                spread: 80,
-                startVelocity: 45,
-                origin: { y: 0.6 }
-            });
-
-            // Side bursts
-            confetti({
-                particleCount: 80,
-                angle: 60,
-                spread: 60,
-                origin: { x: 0, y: 0.7 }
-            });
-
-            confetti({
-                particleCount: 80,
-                angle: 120,
-                spread: 60,
-                origin: { x: 1, y: 0.7 }
-            });
+            confetti({ particleCount: 180, spread: 80, startVelocity: 45, origin: { y: 0.6 } });
+            confetti({ particleCount: 80, angle: 60, spread: 60, origin: { x: 0, y: 0.7 } });
+            confetti({ particleCount: 80, angle: 120, spread: 60, origin: { x: 1, y: 0.7 } });
         }
 
-        const birthdayForm = document.getElementById('birthdayForm');
+        // Detect impossible dates
+        function isImpossibleBirthday(dateString) {
+            if (!dateString || !/^\d{4}-\d{2}-\d{2}$/.test(dateString)) return true;
 
-        if (birthdayForm) {
-            birthdayForm.addEventListener('submit', function(event) {
-                event.preventDefault();
+            const [year, month, day] = dateString.split("-").map(Number);
+            const testDate = new Date(year, month - 1, day);
 
-                const birthdayInput = document.getElementById('birthdayInput');
-                if (!birthdayInput || !birthdayInput.value) return;
-
-                // Save the birthday locally
-                localStorage.setItem('birthdayScoutBirthday', birthdayInput.value);
-
-                // Fire confetti 🎉
-                launchConfetti();
-
-                // Delay so confetti is visible, then go to deals
-                setTimeout(() => {
-                    window.location.href = 'deals.html';
-                }, 1200);
-            });
-        }
-        <script>
-    // Returns true if the birthday input is impossible / invalid.
-    function isImpossibleBirthday(dateString) {
-        // Basic format check
-        if (!dateString || !/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
-            return true;
+            return !(
+                testDate.getFullYear() === year &&
+                testDate.getMonth() === month - 1 &&
+                testDate.getDate() === day
+            );
         }
 
-        const [year, month, day] = dateString.split("-").map(Number);
+        const birthdayForm = document.getElementById("birthdayForm");
+        const heroImage = document.querySelector(".hero-illustration");
+        const errorMsg = document.getElementById("birthdayError");
 
-        // Create date object and compare parts
-        const testDate = new Date(year, month - 1, day);
+        birthdayForm.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-        const isValid =
-            testDate.getFullYear() === year &&
-            testDate.getMonth() === month - 1 &&
-            testDate.getDate() === day;
+            const value = document.getElementById("birthdayInput").value;
 
-        return !isValid;
-    }
+            // Impossible date → show alien, show error, no redirect
+            if (isImpossibleBirthday(value)) {
+                heroImage.src = "images/alien-confused.png";
+                heroImage.alt = "Confused alien";
+                errorMsg.style.display = "block";
+                return;
+            }
 
-    const heroImage = document.querySelector(".hero-illustration");
+            // Valid date → hide error, reset image
+            errorMsg.style.display = "none";
+            heroImage.src = "images/birthday-hero.png";
+            heroImage.alt = "Friends celebrating a birthday";
 
-    birthdayForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+            // Save birthday
+            localStorage.setItem("birthdayScoutBirthday", value);
 
-        const birthdayInput = document.getElementById("birthdayInput");
-        const value = birthdayInput.value;
-
-        // Check for impossible birthdays
-        if (isImpossibleBirthday(value)) {
-            heroImage.src = "images/alien-confused.png";
-            heroImage.alt = "Confused alien";
-            return; // do NOT redirect, only show the alien
-        }
-
-        // Save valid birthday
-        localStorage.setItem("birthdayScoutBirthday", value);
-
-        // Confetti and redirect
-        launchConfetti();
-        setTimeout(() => {
-            window.location.href = "deals.html";
-        }, 1200);
-    });
-</script>
-
+            // Confetti + redirect
+            launchConfetti();
+            setTimeout(() => {
+                window.location.href = "deals.html";
+            }, 1200);
+        });
     </script>
 
 </body>
