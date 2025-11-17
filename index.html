@@ -127,6 +127,53 @@
                 }, 1200);
             });
         }
+        <script>
+    // Returns true if the birthday input is impossible / invalid.
+    function isImpossibleBirthday(dateString) {
+        // Basic format check
+        if (!dateString || !/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+            return true;
+        }
+
+        const [year, month, day] = dateString.split("-").map(Number);
+
+        // Create date object and compare parts
+        const testDate = new Date(year, month - 1, day);
+
+        const isValid =
+            testDate.getFullYear() === year &&
+            testDate.getMonth() === month - 1 &&
+            testDate.getDate() === day;
+
+        return !isValid;
+    }
+
+    const heroImage = document.querySelector(".hero-illustration");
+
+    birthdayForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const birthdayInput = document.getElementById("birthdayInput");
+        const value = birthdayInput.value;
+
+        // Check for impossible birthdays
+        if (isImpossibleBirthday(value)) {
+            heroImage.src = "images/alien-confused.png";
+            heroImage.alt = "Confused alien";
+            return; // do NOT redirect, only show the alien
+        }
+
+        // Save valid birthday
+        localStorage.setItem("birthdayScoutBirthday", value);
+
+        // Confetti and redirect
+        launchConfetti();
+        setTimeout(() => {
+            window.location.href = "deals.html";
+        }, 1200);
+    });
+</script>
+
     </script>
 
 </body>
